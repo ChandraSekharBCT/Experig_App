@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<title>Experig</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/fullcalendar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/matrix-style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/matrix-media.css' %}" />
+<link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/jquery.gritter.css' %}" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<!--Header-part-->
+<div id="header">
+  <h1><a href="/">Experig</a></h1>
+</div>
+<!--close-Header-part--> 
+
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i> {% if user.is_authenticated %}
+                              
+                                  <span class="text">Welcome {{user.username}}</span>
+          
+                                {% else %}
+                                
+                                <span class="text">Welcome User</span>
+                                {% endif %} <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
+        <li class="divider"></li>
+        <li><a href="/logout"><i class="icon-key"></i> Log Out</a></li>
+      </ul>
+    </li>
+    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
+        <li class="divider"></li>
+        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
+        <li class="divider"></li>
+        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
+        <li class="divider"></li>
+        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+      </ul>
+    </li>
+    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+        <li class=""><a href="login.html" data-toggle="tooltip" data-placement="bottom" title="Add item in the cart!"><i class="icon icon-shopping-cart" aria-hidden="true"></i>
+  </a></li>
+  </ul>
+</div>
+<!--close-top-Header-menu-->
+<!--start-top-serch-->
+<div id="search">
+  <input type="text" placeholder="Search here..."/>
+  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+</div>
+<!--close-top-serch-->
+<!--sidebar-menu-->
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+  <ul>
+    <li class="active"><a href=""><i class="icon icon-home"></i> <span>My Projects</span></a> </li>
+     <li><a href="/new_project_screen"><i class="icon icon-user"></i> <span>New Project</span></a> </li>
+    <li> <a href=""><i class="icon icon-signal"></i> <span>Talent Pool</span></a> </li>
+    <li> <a href=""><i class="icon icon-inbox"></i> <span>Submissions</span></a> </li>
+    <li><a href=""><i class="icon icon-th"></i> <span>Hire Someone</span></a></li>
+    <li><a href=""><i class="icon icon-fullscreen"></i> <span>My Wallet</span></a></li>
+    
+    <li><a href=""><i class="icon icon-tint"></i> <span>My Profile</span></a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+<!--sidebar-menu-->
+
+<!--main-container-part-->
+<div id="content">
+<!--breadcrumbs-->
+  <div id="content-header">
+    <div id="breadcrumb"> 
+      <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+      <div class="row" style="margin-left: 95px;">
+        
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          {% if user.is_authenticated %}
+                                <div class="col-md-8">
+          <h3 style="text-align: center;"> Welcome {{user.username}}</h3></div>
+                                {% else %}
+                                
+                                <h3 style="text-align: center;">Welcome to TCS</h3></div>
+                                {% endif %}
+        <div class="col-md-2"></div>
+      </div>
+      
+    </div>
+  </div>
+<!--End-breadcrumbs-->
+
+<!--Action boxes-->
+  <div class="container-fluid">
+ 
+<!--End-Action boxes-->    
+
+    <!-- <div class="row-fluid" >
+      <center>
+        <div class="widget-box" style="width: 58%;float: initial">
+          <div class="widget-content">
+            <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 72% Uniquie Clicks <span class="pull-right strong"></span>
+                <div class="progress progress-success progress-striped ">
+                  <div style="width: 72%;" class="bar"></div>
+                </div>
+          </div>
+        </div>
+      </div>
+  </center>
+      <center>
+       <div class="span12" style="width: 58%; float: initial; padding: 21px;">
+        <label>Complete these steps to set up your school</label>
+        <div class="widget-box">
+          <div class="widget-content">
+         
+                <div class="row">
+                  <div class="span1">
+                    <img src="{% static 'img/webinar.jpg' %}" style="width:52px; margin-left: 30px;">
+                    </div>
+                  <div class="span3"> <span style="font-size: 17px;font-weight: 500;color: #809196;">Sign up for our live Free</span>
+                  </div>
+                </div>
+           </div> 
+         </div>
+    
+        <div class="widget-box">
+          <div class="widget-content">
+               <div class="row">
+                  <div class="span1">
+                    <image src="{% static 'img/create_course.jpg' %}" style="width:52px; margin-left: 30px;">
+                    </div>
+                  <div class="span3"> 
+                    <span style="font-size: 17px;font-weight: 500;color: #809196;margin-left: -74px;">Create a Course</span>
+                  </div>
+                </div>
+           </div> 
+         </div>
+
+         <div class="widget-box">
+          <div class="widget-content">
+               <div class="row">
+                  <div class="span1">
+                    <image src="{% static 'img/customize.png' %}" style="width:52px; margin-left: 30px;">
+                    </div>
+                  <div class="span3"> 
+                    <span style="font-size: 17px;font-weight: 500;color: #809196;margin-left: -10px;">Customize look and feel</span>
+                  </div>
+                </div>
+           </div> 
+         </div>
+
+         <div class="widget-box">
+          <div class="widget-content">
+               <div class="row">
+                  <div class="span1">
+                    <image src="{% static 'img/domain.png' %}" style="width:52px; margin-left: 30px;">
+                    </div>
+                  <div class="span3"> 
+                    <span style="font-size: 17px;font-weight: 500;color: #809196;">Set up your domain name</span>
+                  </div>
+                </div>
+           </div> 
+         </div>
+
+         <div class="widget-box">
+          <div class="widget-content">
+               <div class="row">
+                  <div class="span1">
+                    <image src="{% static 'img/launch.jpg' %}" style="width:52px; margin-left: 30px;">
+                    </div>
+                  <div class="span3"> 
+                    <span style="font-size: 17px;font-weight: 500;color: #809196;margin-left: -41px;">Launch your school</span>
+                  </div>
+                </div>
+           </div> 
+         </div>
+
+      </div>
+      </center>
+   </div>
+  </div> -->
+  <br>
+  <br>
+<div align="center">
+  <a href="/create_project" class="btn btn-lg btn-primary">
+I want to post a project that creates the best Talent Pool for my company</a>
+</div>
+<br>
+<h1 align="center">OR</h1>
+<br>
+<div align="center">
+  <a href="" class="btn btn-lg btn-primary">
+I want to post a project that is finished with 100% quality from best freelancers</a>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+<!--end-main-container-part-->
+
+<!--Footer-part-->
+
+<!-- <div class="row-fluid">
+  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+</div> -->
+
+<!--end-Footer-part-->
+
+<script src="{% static 'js/excanvas.min.js' %}"></script> 
+<script src="{% static 'js/jquery.min.js' %}"></script> 
+<script src="{% static 'js/jquery.ui.custom.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flot.min.js' %}"></script> 
+<script src="{% static 'js/jquery.flot.resize.min.js' %}"></script> 
+<script src="{% static 'js/jquery.peity.min.js' %}"></script> 
+<script src="{% static 'js/fullcalendar.min.js' %}"></script> 
+<script src="{% static 'js/matrix.js' %}"></script> 
+<script src="{% static 'js/matrix.dashboard.js' %}"></script> 
+<script src="{% static 'js/jquery.gritter.min.js' %}"></script> 
+<script src="{% static 'js/matrix.interface.js' %}"></script> 
+<script src="{% static 'js/matrix.chat.js' %}"></script> 
+<script src="{% static 'js/jquery.validate.js' %}"></script> 
+<script src="{% static 'js/matrix.form_validation.js' %}"></script> 
+<script src="{% static 'js/jquery.wizard.js' %}"></script> 
+<script src="{% static 'js/jquery.uniform.js' %}"></script> 
+<script src="{% static 'js/select2.min.js' %}"></script> 
+<script src="{% static 'js/matrix.popover.js' %}"></script> 
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script> 
+<script src="{% static 'js/matrix.tables.js' %}"></script> 
+
+<script type="text/javascript">
+  // This function is called from the pop-up menus to transfer to
+  // a different page. Ignore if the value returned is a null string:
+  function goPage (newURL) {
+
+      // if url is empty, skip the menu dividers and reset the menu selection to default
+      if (newURL != "") {
+      
+          // if url is "-", it is this page -- reset the menu:
+          if (newURL == "-" ) {
+              resetMenu();            
+          } 
+          // else, send page to designated URL            
+          else {  
+            document.location.href = newURL;
+          }
+      }
+  }
+
+// resets the menu selection upon entry to this page:
+function resetMenu() {
+   document.gomenu.selector.selectedIndex = 2;
+}
+</script>
+</body>
+</html>
